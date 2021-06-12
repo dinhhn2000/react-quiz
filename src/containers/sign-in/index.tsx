@@ -3,7 +3,6 @@ import './sign-in.css'
 import signInImg from '../../assets/sign-in-bg.png'
 import BackButton from '../../components/button/back-button'
 import { Input, message } from 'antd'
-import { Link, Redirect } from 'react-router-dom'
 import { CommonDataContext } from '../../store/providers'
 
 export type Props = {

@@ -7,7 +7,6 @@ import Result from '../../components/qa/res'
 import ProgressBar from '../../components/progress-bar'
 import './quiz.css'
 
-interface Props {}
 
 interface Question {
   id: number
@@ -16,7 +15,7 @@ interface Question {
   chosen?: string
 }
 
-export default function Quiz({}: Props): ReactElement {
+export default function Quiz(): ReactElement {
   const [currentQuestion, setCurrentQuestion] = useState<Question>({
     id: 0,
     question: '',
