@@ -1,83 +1,87 @@
-import { Component } from 'react'
+import { ReactElement, useContext, useEffect, useState } from 'react'
 import './sign-in.css'
 import signInImg from '../../assets/sign-in-bg.png'
 import BackButton from '../../components/button/back-button'
 import { Input, message } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { CommonDataContext } from '../../store/providers'
 
-export default class SignIn extends Component<any, any> {
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      email: '',
-      password: ''
-    }
-    this.onchangeEmail = this.onchangeEmail.bind(this)
-    this.onchangePassword = this.onchangePassword.bind(this)
-    this.logIn = this.logIn.bind(this)
-    this.validate = this.validate.bind(this)
-  }
+export type Props = {
+  children: React.ReactNode
+}
 
-  validate(email: string, password: string) {
+export default function SignIn(props: Props): ReactElement {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { needToolbar } = useContext(CommonDataContext)
+  const setNeedToolbar = needToolbar[1]
+
+  useEffect(() => {
+    setNeedToolbar(false)
+  })
+
+  const validate = (email: string, password: string) => {
     const re =
       /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-    return re.test(String(email).toLowerCase()) && password.length > 0
+    return (
+      re.test(String(email).toLowerCase()) &&
+      password.length > 0 &&
+      email === 'admin@gmail.com' &&
+      password === 'admin'
+    )
   }
 
-  onchangeEmail(e: any) {
-    this.setState({ email: e.target.value })
+  const onchangeEmail = (e: any) => {
+    setEmail(e.target.value)
   }
 
-  onchangePassword(e: any) {
-    this.setState({ password: e.target.value })
+  const onchangePassword = (e: any) => {
+    setPassword(e.target.value)
   }
 
-  logIn() {
-    const { email, password } = this.state
+  const logIn = () => {
     if (!email || !password) return message.warning('Please enter email and password')
-    if (!this.validate(email, password)) return message.error('Email or password is not correct')
-    const userInfo = { email: this.state.email }
+    if (!validate(email, password)) return message.error('Email or password is not correct')
+    const userInfo = { email, password }
     localStorage.setItem('user', JSON.stringify(userInfo))
     window.location.href = '/'
   }
 
-  render() {
-    const { email, password } = this.state
-    return (
-      <div className="sign-in">
-        <img className="sign-in-bg" src={signInImg} alt="Sign In Background" />
-        <div className="sign-in-page">
-          <BackButton text="BACK TO HOMEPAGE" href="/"></BackButton>
-          <div className="sign-in-form">
-            <h1 className="sign-in-title">Welcome back!</h1>
-            <div className="sign-in-inputs">
-              <Input
-                className="sign-in-input"
-                placeholder="Your email address"
-                type="email"
-                value={email}
-                onChange={this.onchangeEmail}
-              />
-              <Input
-                className="sign-in-input"
-                placeholder="Your password"
-                type="password"
-                value={password}
-                onChange={this.onchangePassword}
-              />
-            </div>
-            <button className="sign-in-btn" type="submit" onClick={this.logIn}>
-              Login
-            </button>
+  return (
+    <div className="sign-in">
+      <img className="sign-in-bg" src={signInImg} alt="Sign In Background" />
+      <div className="sign-in-page">
+        <BackButton text="BACK TO HOMEPAGE" href="/"></BackButton>
+        <div className="sign-in-form">
+          <h1 className="sign-in-title">Welcome back!</h1>
+          <div className="sign-in-inputs">
+            <Input
+              className="sign-in-input"
+              placeholder="Your email address"
+              type="email"
+              value={email}
+              onChange={onchangeEmail}
+            />
+            <Input
+              className="sign-in-input"
+              placeholder="Your password"
+              type="password"
+              value={password}
+              onChange={onchangePassword}
+            />
           </div>
-          <span>
-            <Link className="sign-in-homepage-link" to="/">
-              DBlog
-            </Link>
-            A minimal, emotionless and boring blog
-          </span>
+          <button className="sign-in-btn" type="submit" onClick={logIn}>
+            Login
+          </button>
         </div>
+        <span>
+          <Link className="sign-in-homepage-link" to="/">
+            DQuiz
+          </Link>
+          A minimal, emotionless and boring quiz site <br></br> If u donot have an account, u can
+          use admin@gmail.com - admin to login
+        </span>
       </div>
-    )
-  }
+    </div>
+  )
 }

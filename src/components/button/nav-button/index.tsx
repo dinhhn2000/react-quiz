@@ -1,12 +1,16 @@
 import './nav-button.css'
+import { NavLink } from 'react-router-dom'
 
 export default function NavButton(props: any) {
   return (
-    <button
-      className="nav-button"
-      onClick={() => (window.location.href = props.href ? props.href : '#')}
-    >
-      {props.text}
-    </button>
+    <div>
+      <NavLink
+        className="nav-button"
+        to={props.href ? props.href : '#'}
+        // onClick={() => (window.location.href = props.href ? props.href : '#')}
+      >
+        {props.text}
+      </NavLink>
+    </div>
   )
 }

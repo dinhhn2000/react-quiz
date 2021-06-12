@@ -16,25 +16,21 @@ const Toolbar = (props: any) => {
     }
   ]
 
-  return props.isAuth ? (
-    <></>
-  ) : (
+  return (
     <header className="Toolbar">
       <div className="d-flex align-items-center" style={{ maxHeight: '100px' }}>
         <div className="Logo" onClick={() => (window.location.href = '/')}>
           <Logo />
         </div>
       </div>
-      <div>
+      <div className="toolbar-nav-btn">
+        {navBtns.map((nav) => (
+          <NavButton key={nav.text} text={nav.text} href={nav.href} />
+        ))}
         {localStorage.getItem('user') ? (
           <LogOutButton />
         ) : (
-          <div>
-            {navBtns.map((nav) => (
-              <NavButton key={nav.text} text={nav.text} href={nav.href} />
-            ))}
-            <RainbowBtn text="Sign in" href="/sign-in" />
-          </div>
+          <RainbowBtn text="Sign in" href="/sign-in" />
         )}
       </div>
     </header>

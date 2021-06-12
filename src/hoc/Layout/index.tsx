@@ -1,27 +1,21 @@
-import React, { Component } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import './layout.css'
-
 import Toolbar from '../../components/toolbar'
 import Auxiliary from '../Auxiliary'
+import { CommonDataContext } from '../../store/providers'
 
-class Layout extends Component {
-  checkIsInAuthSites = () => {
-    return window.location.pathname === '/sign-in' || window.location.pathname === '/sign-up'
-  }
-
-  render() {
-    return (
-      <Auxiliary>
-        <Toolbar isAuth={this.checkIsInAuthSites()} />
-        <main
-          className="content"
-          style={{ paddingTop: this.checkIsInAuthSites() ? 0 : 100, minHeight: '100vh' }}
-        >
-          {this.props.children}
-        </main>
-      </Auxiliary>
-    )
-  }
+export type Props = {
+  children: React.ReactNode
 }
+export default function Layout(props: Props): ReactElement {
+  const { needToolbar } = useContext(CommonDataContext)
 
-export default Layout
+  return (
+    <Auxiliary>
+      {needToolbar[0] && <Toolbar />}
+      <main className="content" style={{ paddingTop: !needToolbar[0] ? 0 : 80, minHeight: '100vh' }}>
+        {props.children}
+      </main>
+    </Auxiliary>
+  )
+}

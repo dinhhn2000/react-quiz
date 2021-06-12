@@ -17,6 +17,12 @@
   height: 100%;
 }
 
+.toolbar-nav-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .Logo {
   height: 80%;
 }

@@ -1,16 +1,15 @@
-import { Link } from 'react-router-dom'
 import './article.css'
 
 export default function Article(props: any) {
   return (
     <div className="article-container">
-      <Link to={props.href}>
+      <a href={props.href} target="_blank" rel="noreferrer">
         <img className="article-image" src={props.src} alt={props.text} />
-        <Link to={props.author} className="article-author">
+        <a href={props.authorHref} target="_blank" rel="noreferrer" className="article-author">
           {props.author}
-        </Link>
+        </a>
         <p className="article-content">{props.content}</p>
-      </Link>
+      </a>
     </div>
   )
 }
