@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import { Switch, Route } from 'react-router-dom'
+import SignInComponent from './containers/sign-in'
+import Layout from './hoc/Layout'
+import HomePage from './containers/home'
+import Homework from './containers/homework'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  checkLogedIn() {
+    return localStorage.getItem('user')
+  }
+
+  render() {
+    const routes = this.checkLogedIn() ? (
+      <Switch>
+        <Route exact path="/" component={HomePage}></Route>
+        <Route path="*" component={HomePage}></Route>
+      </Switch>
+    ) : (
+      <Switch>
+        <Route exact path="/" component={HomePage}></Route>
+        <Route exact path="/sign-in" component={SignInComponent}></Route>
+        <Route exact path="/sign-up" component={SignInComponent}></Route>
+        <Route exact path="/quiz" component={Homework}></Route>
+        <Route path="*" component={HomePage}></Route>
+      </Switch>
+    )
+    return <Layout>{routes}</Layout>
+  }
 }
 
-export default App;
+export default App

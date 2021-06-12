@@ -1,0 +1,21 @@
+.trending-articles-container {
+  display: flex;
+  flex-direction: row;
+  background-image: url('../../assets/homepage-bg-01.jpg');
+  padding: 20px;
+  border-radius: 4px;
+  flex-wrap: wrap;
+  object-fit: cover;
+}
+
+.articles-group-title {
+  margin-top: 40px;
+  border-bottom: 4px solid #ffbf00;
+  font-weight: bold;
+}
+
+.homepage-container {
+  padding: 0 60px;
+}
+
+

@@ -1,0 +1,2 @@
+About the assignment, I am currently appling React to write a blog, and it's a private repo so I can not show the code inside. So I upload only the code which the assignment needs.
+The result of the code, you can see it in **Homework** tab in this website: https://wzzzwblog.herokuapp.com/

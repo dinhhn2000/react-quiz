@@ -1,0 +1,8 @@
+i.back-btn-icon {
+  margin-right: 5px;
+}
+
+button.back-button:hover i {
+  transform: translate(-5px, 0);
+  transition: transform 0.2s ease-in-out;
+}

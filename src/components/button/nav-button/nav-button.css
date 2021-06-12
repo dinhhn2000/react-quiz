@@ -1,0 +1,14 @@
+.nav-button {
+  font-size: 15px;
+  position: relative;
+  background-color: transparent;
+  border: 0;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  font-family: 'Alata', sans-serif;
+  font-weight: 400;
+}
+
+.nav-button:hover {
+  cursor: pointer;
+}
