@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Article from '../../components/article'
+import Footer from '../../components/footer'
 import './home.css'
 
 interface ArticleInterface {
@@ -57,6 +58,7 @@ export default function HomePage() {
           <Article key={`latest-${index}`} {...article} />
         ))}
       </div>
+      <Footer />
     </div>
   )
 }

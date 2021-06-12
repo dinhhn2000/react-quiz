@@ -1,5 +1,5 @@
 .nav-button {
-  font-size: 15px;
+  font-size: 18px;
   position: relative;
   background-color: transparent;
   border: 0;
@@ -14,4 +14,5 @@
 .nav-button:hover {
   cursor: pointer;
   color: white;
+  border-bottom: solid 4px white;
 }

@@ -1,16 +1,16 @@
 .signout-btn {
   background-color: crimson;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 35px;
   padding: 4px;
-  padding-left: 24px;
+  padding-left: 28px;
   margin: 0 16px;
   border-radius: 8px;
   border: none;
   outline: 0;
-  width: 120px;
+  width: 128px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
@@ -19,12 +19,12 @@
 .signout-btn i {
   opacity: 0;
   top: 0;
-  right: -3px;
+  right: -4px;
   transition: 0.3s;
 }
 
 .signout-btn:hover i {
-  padding-right: 12px;
+  padding-right: 8px;
   opacity: 1;
   right: 0;
 }

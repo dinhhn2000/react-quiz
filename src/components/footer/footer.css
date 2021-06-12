@@ -1,6 +1,13 @@
 .footer-section {
-  background-color: #f1f1f1;
-  padding-top: 200px;
+  background-color: #263238;
+  padding-top: 20px;
+  width: 99vw;
+  position: absolute;
+  left: 0;
+}
+
+.footer-description {
+  color: white;
 }
 
 .footer-logo {
@@ -51,7 +58,7 @@
   padding: 0;
   transition: background-color 0.15s ease;
   border-radius: 8px;
-  background-color: #dfdfe1;
+  background-color: white;
 }
 
 .footer-icons svg {
@@ -61,7 +68,7 @@
 
 .footer-nav-column h5 {
   text-transform: uppercase;
-  color: #797979;
+  color: white;
 }
 
 .footer-nav-column ul {
@@ -70,7 +77,7 @@
 }
 
 .footer-nav-column li a {
-  color: #3f61a0;
+  color: #5785db;
 }
 
 .footer-nav-column li {
@@ -83,4 +90,5 @@
 
 .footer-copyright {
   padding: 5px 20px;
+  color: white;
 }

@@ -1,0 +1,45 @@
+import React, { ReactElement } from 'react'
+import './res.scss'
+
+interface Question {
+  id: number
+  question: string
+  choices: { [key: string]: string }
+}
+
+interface Props {
+  status: boolean
+  answers: Question[]
+}
+
+export default function Result(props: Props): ReactElement {
+  return (
+    <div className="result-screen">
+      <div className="result-screen-left">
+        <div className={props.status ? 'result-container pass' : 'result-container fail'}>
+          <span>{props.status ? 'Pass' : 'Fail'}</span>
+        </div>
+        <button className="answer-container" onClick={() => window.location.reload()}>
+          Retry???
+        </button>
+      </div>
+      <div className="result-container">
+        {props.answers?.length > 0 ? (
+          <p style={{ textAlign: 'justify' }}>
+            You have chosen wrong <b style={{ color: 'crimson' }}>{props.answers.length}</b>{' '}
+            answers. If you feel that you cannot pass this test, why don't you play some game to
+            gain some spirit. I suggest you play{' '}
+            <a href="https://osu.ppy.sh/home" target="_blank" rel="noreferrer">
+              this
+            </a>
+          </p>
+        ) : (
+          <p>
+            Congratulation, you have passed the test. But do not be arrogant, the outside world is
+            enormous to explore. I wish you have a great journey in the future{' '}
+          </p>
+        )}
+      </div>
+    </div>
+  )
+}

@@ -75,9 +75,14 @@ export default function SignIn(props: Props): ReactElement {
           </button>
         </div>
         <span>
-          <Link className="sign-in-homepage-link" to="/">
+          <a
+            className="sign-in-homepage-link"
+            href="https://osu.ppy.sh/home"
+            target="_blank"
+            rel="noreferrer"
+          >
             DQuiz
-          </Link>
+          </a>
           A minimal, emotionless and boring quiz site <br></br> If u donot have an account, u can
           use admin@gmail.com - admin to login
         </span>

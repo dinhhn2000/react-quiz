@@ -5,6 +5,7 @@ import SignInComponent from './containers/sign-in'
 import Layout from './hoc/Layout'
 import HomePage from './containers/home'
 import Exception from './containers/exception'
+import Quiz from './containers/quiz'
 
 export default function App(): ReactElement {
   const checkLogedIn = () => {
@@ -14,7 +15,7 @@ export default function App(): ReactElement {
   const routes = checkLogedIn() ? (
     <Switch>
       <Route exact path="/" component={HomePage}></Route>
-      <Route exact path="/quiz" component={HomePage}></Route>
+      <Route exact path="/quiz" component={Quiz}></Route>
       <Route path="*" component={() => <Exception code={404} text="Page not found" />}></Route>
     </Switch>
   ) : (
