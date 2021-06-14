@@ -116,7 +116,11 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-copyright">
-        DQuiz © 2021. All Right Reserved. Published with <a href="https://google.com">zZz</a>.
+        DQuiz © 2021. All Right Reserved. Published with{' '}
+        <a href="https://github.com/dinhhn2000" target="_blank" rel="noreferrer">
+          zZz
+        </a>
+        .
       </div>
     </footer>
   )

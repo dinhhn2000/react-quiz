@@ -89,3 +89,21 @@ a:active.btn {
   font-size: 80px;
   text-shadow: 2px 2px #868686;
 }
+
+.failed-answers {
+  display: flex;
+  flex-direction: row;
+}
+
+.failed-answers-container {
+  font-size: 24px;
+}
+
+.failed-answers-container.failed {
+  background-color: crimson;
+  color: white;
+}
+.failed-answers-container.passed {
+  background-color: #4aca75;
+  color: white;
+}

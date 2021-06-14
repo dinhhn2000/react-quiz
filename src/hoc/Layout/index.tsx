@@ -8,12 +8,17 @@ export type Props = {
   children: React.ReactNode
 }
 export default function Layout(props: Props): ReactElement {
-  const { needToolbar } = useContext(CommonDataContext)
+  const { needToolbar, loading } = useContext(CommonDataContext)
 
   return (
     <Auxiliary>
-      {needToolbar[0] && <Toolbar />}
-      <main className="content" style={{ paddingTop: !needToolbar[0] ? 0 : 80, minHeight: '100vh' }}>
+      {needToolbar && <Toolbar />}
+      <main className="content" style={{ paddingTop: !needToolbar ? 0 : 80, minHeight: '100vh' }}>
+        {loading && (
+          <div className="loading-screen">
+            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+          </div>
+        )}
         {props.children}
       </main>
     </Auxiliary>

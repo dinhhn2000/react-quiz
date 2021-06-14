@@ -56,9 +56,13 @@
   height: 54px;
   margin: 0 0 6px 6px;
   padding: 0;
-  transition: background-color 0.15s ease;
+  transition: 0.2 background-colors ease;
   border-radius: 8px;
   background-color: white;
+}
+
+.footer-icons a:hover {
+  background-color: #ffbf00;
 }
 
 .footer-icons svg {
@@ -90,5 +94,9 @@
 
 .footer-copyright {
   padding: 5px 20px;
+  color: white;
+}
+
+.footer-nav-column a:hover {
   color: white;
 }
