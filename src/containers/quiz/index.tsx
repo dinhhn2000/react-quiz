@@ -1,12 +1,12 @@
 import axios from 'axios'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useContext, useEffect, useState } from 'react'
 import Answer from '../../components/qa/answer'
 import QuestionComponent from '../../components/qa/question'
 import NavQuestion from '../../components/qa/nav'
 import Result from '../../components/qa/res'
 import ProgressBar from '../../components/progress-bar'
 import './quiz.css'
-
+import { CommonDataContext } from '../../store/providers'
 
 interface Question {
   id: number
@@ -29,18 +29,21 @@ export default function Quiz(): ReactElement {
   const [resultStatus, setResultStatus] = useState<boolean>(false)
   const [failAnswers, setFailAnswers] = useState<Question[]>([])
 
-  useEffect(() => {
-    getQuestions()
-  }, [])
+  const { loading, setLoading } = useContext(CommonDataContext)
 
-  const getQuestions = async () => {
-    const { data } = await axios.get('https://react14-contest-easy-quiz-app.herokuapp.com/quiz')
-    const ques = data.result.map((q: Question) => {
-      return { ...q, chosen: '' }
-    })
-    setQuestions(ques)
-    setCurrentQuestion(ques[0])
-  }
+  useEffect(() => {
+    const getQuestions = async () => {
+      setLoading(true)
+      const { data } = await axios.get('https://react14-contest-easy-quiz-app.herokuapp.com/quiz')
+      const ques = data.result.map((q: Question) => {
+        return { ...q, chosen: '' }
+      })
+      setLoading(false)
+      setQuestions(ques)
+      setCurrentQuestion(ques[0])
+    }
+    getQuestions()
+  }, [setLoading])
 
   const chooseAnswer = (index: number) => {
     setCurrentQuestion({ ...currentQuestion, chosen: Object.keys(currentQuestion.choices)[index] })
@@ -80,12 +83,7 @@ export default function Quiz(): ReactElement {
   }
 
   const submit = async () => {
-    console.log(
-      questions.map((q) => {
-        return { id: q.id, choice: q.chosen }
-      })
-    )
-
+    setLoading(true)
     const { data } = await axios.post(
       'https://react14-contest-easy-quiz-app.herokuapp.com/quiz/answer',
       {
@@ -94,44 +92,46 @@ export default function Quiz(): ReactElement {
         })
       }
     )
-
-    console.log(data)
-
     const { status, incorrectAnswers } = data
     setShowResult(true)
     setResultStatus(status === 'F' ? false : true)
     setFailAnswers(incorrectAnswers)
+    setLoading(false)
   }
 
   return (
     <div className="quiz-bg">
-      {!showResult && (
+      {!loading && !showResult && (
         <ProgressBar current={getCurrentQuestionIndex() + 1} total={questions.length} />
       )}
-      <div className="qa-section">
-        {!showResult && (
-          <div className="question-section">
-            {currentQuestion && <QuestionComponent question={currentQuestion.question} />}
-            <div className="nav-question-section">
-              {showBtnBack && <NavQuestion text="Back" onClick={() => changeQuestion('prev')} />}
-              <NavQuestion text={nextBtnText} onClick={() => changeQuestion('next')} />
+      {!loading && (
+        <div className="qa-section">
+          {!showResult && (
+            <div className="question-section">
+              {currentQuestion && <QuestionComponent question={currentQuestion.question} />}
+              <div className="nav-question-section">
+                {showBtnBack && <NavQuestion text="Back" onClick={() => changeQuestion('prev')} />}
+                <NavQuestion text={nextBtnText} onClick={() => changeQuestion('next')} />
+              </div>
             </div>
-          </div>
-        )}
-        {currentQuestion && !showResult && (
-          <div className="answer-section">
-            {Object.keys(currentQuestion.choices).map((choice: string, index) => (
-              <Answer
-                key={index}
-                answer={currentQuestion.choices[choice]}
-                chosen={choice === currentQuestion.chosen}
-                onClick={() => chooseAnswer(index)}
-              />
-            ))}
-          </div>
-        )}
-        {showResult && <Result status={resultStatus} answers={failAnswers} />}
-      </div>
+          )}
+          {currentQuestion && !showResult && (
+            <div className="answer-section">
+              {Object.keys(currentQuestion.choices).map((choice: string, index) => (
+                <Answer
+                  key={index}
+                  answer={currentQuestion.choices[choice]}
+                  chosen={choice === currentQuestion.chosen}
+                  onClick={() => chooseAnswer(index)}
+                />
+              ))}
+            </div>
+          )}
+          {showResult && (
+            <Result status={resultStatus} answers={failAnswers} questions={questions} />
+          )}
+        </div>
+      )}
     </div>
   )
 }

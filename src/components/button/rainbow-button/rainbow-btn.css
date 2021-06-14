@@ -23,15 +23,12 @@
   background-color: #ffbf00;
   color: rgb(30, 30, 30);
   font-size: 16px;
-  font-weight: 500;
   line-height: 35px;
   padding: 4px 16px;
   margin: 0 16px;
   border-radius: 8px;
-  outline: 0;
-  width: auto;
-  text-align: center;
-  letter-spacing: normal;
+  border: 0;
+  cursor: pointer;
   /* Transition darker when hover */
   transition: 0.5s;
 }

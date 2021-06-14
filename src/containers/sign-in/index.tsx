@@ -4,6 +4,7 @@ import signInImg from '../../assets/sign-in-bg.png'
 import BackButton from '../../components/button/back-button'
 import { Input, message } from 'antd'
 import { CommonDataContext } from '../../store/providers'
+import { useHistory } from 'react-router-dom'
 
 export type Props = {
   children: React.ReactNode
@@ -12,8 +13,9 @@ export type Props = {
 export default function SignIn(props: Props): ReactElement {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { needToolbar } = useContext(CommonDataContext)
-  const setNeedToolbar = needToolbar[1]
+  const { setNeedToolbar, setIsLoggedIn } = useContext(CommonDataContext)
+
+  let history = useHistory()
 
   useEffect(() => {
     setNeedToolbar(false)
@@ -43,7 +45,10 @@ export default function SignIn(props: Props): ReactElement {
     if (!validate(email, password)) return message.error('Email or password is not correct')
     const userInfo = { email, password }
     localStorage.setItem('user', JSON.stringify(userInfo))
-    window.location.href = '/'
+    setIsLoggedIn(true)
+    message.success('Login success')
+    history.push('/')
+    setNeedToolbar(true)
   }
 
   return (

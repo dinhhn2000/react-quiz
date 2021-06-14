@@ -1,64 +1,24 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import Article from '../../components/article'
-import Footer from '../../components/footer'
+import { useContext } from 'react'
+import { CommonDataContext } from '../../store/providers'
 import './home.css'
 
-interface ArticleInterface {
-  src: string
-  author: string
-  authorHref: string
-  content: string
-  href: string
-}
-
 export default function HomePage() {
-  const [trendingArticles, setTrendingArticles] = useState<ArticleInterface[]>([])
-  const [latestArticles, setLatestArticles] = useState<ArticleInterface[]>([])
-
-  useEffect(() => {
-    getArticles()
-  }, [])
-
-  const getArticles = async () => {
-    const { data: trendingData } = await axios.get('https://dev.to/api/articles', {
-      params: { tag: 'react', top: 60, per_page: 4 }
-    })
-    const { data: latestData } = await axios.get('https://dev.to/api/articles/latest', {
-      params: { tag: 'react', per_page: 4 }
-    })
-
-    const getNeccessaryData = (data: Array<any>) => {
-      return data.map((article: any) => {
-        return {
-          src: article.cover_image ?? article.social_image,
-          author: article.user.name,
-          authorHref: 'https://dev.to/' + article.user.username,
-          content: article.title,
-          href: article.url
-        }
-      })
-    }
-
-    setTrendingArticles(getNeccessaryData(trendingData))
-    setLatestArticles(getNeccessaryData(latestData))
-  }
+  const { isLoggedIn } = useContext(CommonDataContext)
 
   return (
-    <div className="homepage-container">
-      <h1 className="articles-group-title">Top 4 trending React articles</h1>
-      <div className="trending-articles-container">
-        {trendingArticles.map((article, index) => (
-          <Article key={`trending-${index}`} {...article} />
-        ))}
-      </div>
-      <h1 className="articles-group-title">Top 4 latest React articles</h1>
-      <div className="trending-articles-container">
-        {latestArticles.map((article, index) => (
-          <Article key={`latest-${index}`} {...article} />
-        ))}
-      </div>
-      <Footer />
+    <div className="guest-homepage-container">
+      <h1>
+        Welcome <b>{isLoggedIn ? 'Admin' : ''}</b> to <b>React Quiz</b> site, hope you will have fun
+        time
+      </h1>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/j942wKiXFu8"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen={true}
+      ></iframe>
     </div>
   )
 }

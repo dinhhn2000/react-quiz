@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import { useHistory } from 'react-router-dom'
 import './rainbow-btn.css'
 
 interface Props {
@@ -7,9 +8,11 @@ interface Props {
 }
 
 export default function RainbowBtn(props: Props): ReactElement {
+  let history = useHistory()
+
   return (
-    <a className="rainbow rainbow-1" href={props.href}>
+    <button className="rainbow rainbow-1" onClick={() => history.push(props.href)}>
       {props.text}
-    </a>
+    </button>
   )
 }

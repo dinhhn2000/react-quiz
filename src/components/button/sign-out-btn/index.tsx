@@ -1,6 +1,7 @@
 import './signout-btn.css'
 
 export default function LogOutButton() {
+
   const signOut = () => {
     localStorage.removeItem('user')
     window.location.href = '/'

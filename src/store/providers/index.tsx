@@ -11,10 +11,15 @@ const CommonDataProvider = (props: Props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('user') ? true : false)
   const [needToolbar, setNeedToolbar] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const data = {
-    isLoggedIn: [isLoggedIn, setIsLoggedIn],
-    needToolbar: [needToolbar, setNeedToolbar]
+    isLoggedIn,
+    setIsLoggedIn,
+    needToolbar,
+    setNeedToolbar,
+    loading,
+    setLoading
   }
 
   return <CommonDataContext.Provider value={data}>{children}</CommonDataContext.Provider>
