@@ -87,3 +87,17 @@ a.sign-in-homepage-link {
   margin-right: 3px;
   margin-bottom: 20px;
 }
+
+.sign-in-hint-btn {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  color: #4395e2;
+  font-size: 16px;
+  margin-top: -20px;
+  margin-bottom: -40px;
+}
+
+.sign-in-hint-btn:hover {
+  color: #ffbf00;
+}

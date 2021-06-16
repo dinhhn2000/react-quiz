@@ -4,6 +4,7 @@ import Article from '../../components/article'
 import Footer from '../../components/footer'
 import './news.css'
 import axios from 'axios'
+import WelcomeModal from '../../components/modal'
 
 interface ArticleInterface {
   src: string
@@ -16,6 +17,9 @@ interface ArticleInterface {
 export default function News(): ReactElement {
   const [trendingArticles, setTrendingArticles] = useState<ArticleInterface[]>([])
   const [latestArticles, setLatestArticles] = useState<ArticleInterface[]>([])
+  const [modalVisible] = useState<boolean>(
+    localStorage.getItem('first-time') === 'true' ? true : false
+  )
 
   const { isLoggedIn, setLoading, loading } = useContext(CommonDataContext)
 
@@ -66,6 +70,10 @@ export default function News(): ReactElement {
           ))}
         </div>
         <Footer />
+        <WelcomeModal
+          message="Welcome to news. You can read some React articles to improve your skills"
+          visible={modalVisible}
+        />
       </div>
     )
   )

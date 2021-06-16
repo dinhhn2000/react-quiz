@@ -23,8 +23,10 @@ export default function App(): ReactElement {
   ) : (
     <Switch>
       <Route exact path="/" component={HomePage}></Route>
+      <Route path="/quiz" component={() => <Exception code={403} text="Fobidden" />}></Route>
+      <Route path="/news" component={() => <Exception code={403} text="Fobidden" />}></Route>
       <Route path="/sign-in" component={SignInComponent}></Route>
-      <Route path="*" component={() => <Exception code={403} text="Fobidden" />}></Route>
+      <Route path="*" component={() => <Exception code={404} text="Page not found" />}></Route>
     </Switch>
   )
   return <Layout>{routes}</Layout>
