@@ -1,2 +1,8 @@
-const Auxiliary = (props: any) => props.children;
-export default Auxiliary;
+import React from 'react'
+
+export interface AuxProps {
+  children: React.ReactNode
+}
+
+const Auxiliary = (props: AuxProps) => <>{props.children}</>
+export default Auxiliary

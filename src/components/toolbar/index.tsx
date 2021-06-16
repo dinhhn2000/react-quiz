@@ -6,7 +6,7 @@ import RainbowBtn from '../button/rainbow-button'
 import { useContext } from 'react'
 import { CommonDataContext } from '../../store/providers'
 
-const Toolbar = (props: any) => {
+const Toolbar = () => {
   const { isLoggedIn } = useContext(CommonDataContext)
 
   const navBtns = [

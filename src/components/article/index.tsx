@@ -1,6 +1,15 @@
 import './article.css'
 
-export default function Article(props: any) {
+interface Prop {
+  href?: string
+  src?: string
+  text?: string
+  authorHref?: string
+  author?: string
+  content?: string
+}
+
+export default function Article(props: Prop) {
   return (
     <div className="article-container">
       <a href={props.href} target="_blank" rel="noreferrer">

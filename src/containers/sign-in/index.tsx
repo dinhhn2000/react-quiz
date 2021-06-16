@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useEffect, useState } from 'react'
+import React, { ReactElement, useContext, useEffect, useState } from 'react'
 import './sign-in.css'
 import signInImg from '../../assets/sign-in-bg.png'
 import BackButton from '../../components/button/back-button'
@@ -33,11 +33,11 @@ export default function SignIn(props: Props): ReactElement {
     )
   }
 
-  const onchangeEmail = (e: any) => {
+  const onchangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
 
-  const onchangePassword = (e: any) => {
+  const onchangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
 
@@ -78,7 +78,10 @@ export default function SignIn(props: Props): ReactElement {
               onChange={onchangePassword}
             />
           </div>
-          <button className="sign-in-hint-btn" onClick={() => message.info('Open console in dev tool (F12)')}>
+          <button
+            className="sign-in-hint-btn"
+            onClick={() => message.info('Open console in dev tool (F12)')}
+          >
             Need hint?
           </button>
           <button className="sign-in-btn" type="submit" onClick={logIn}>
