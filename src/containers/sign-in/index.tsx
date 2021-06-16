@@ -19,7 +19,8 @@ export default function SignIn(props: Props): ReactElement {
 
   useEffect(() => {
     setNeedToolbar(false)
-  })
+    console.log(`%cUse admin@gmail.com - admin to login`, 'color: blue; font-size: 20px')
+  }, [setNeedToolbar])
 
   const validate = (email: string, password: string) => {
     const re =
@@ -77,7 +78,7 @@ export default function SignIn(props: Props): ReactElement {
               onChange={onchangePassword}
             />
           </div>
-          <button className="sign-in-hint-btn" onClick={() => message.info('Look at the bottom')}>
+          <button className="sign-in-hint-btn" onClick={() => message.info('Open console in dev tool (F12)')}>
             Need hint?
           </button>
           <button className="sign-in-btn" type="submit" onClick={logIn}>
@@ -93,8 +94,7 @@ export default function SignIn(props: Props): ReactElement {
           >
             DQuiz
           </a>
-          A minimal, emotionless and boring quiz site <br></br> If u do not have an account, u can
-          use (admin@gmail.com - admin) to login
+          A minimal, emotionless and boring quiz site
         </span>
       </div>
     </div>
